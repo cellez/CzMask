@@ -93,7 +93,4 @@ const CzMask = (opt) => {
   opt.el.addEventListener('input', _czmask)
 }
 
-if (!window.CzMask) window.CzMask = CzMask
-
 module.exports = CzMask
-// export default CzMask
