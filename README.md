@@ -1,4 +1,4 @@
-# CsMask
+# CzMask
 
 mask for inputs, JavaScript Vanilla
 
