@@ -1,3 +1,96 @@
-parcelRequire=function(e,r,t,n){var i,o="function"==typeof parcelRequire&&parcelRequire,u="function"==typeof require&&require;function f(t,n){if(!r[t]){if(!e[t]){var i="function"==typeof parcelRequire&&parcelRequire;if(!n&&i)return i(t,!0);if(o)return o(t,!0);if(u&&"string"==typeof t)return u(t);var c=new Error("Cannot find module '"+t+"'");throw c.code="MODULE_NOT_FOUND",c}p.resolve=function(r){return e[t][1][r]||r},p.cache={};var l=r[t]=new f.Module(t);e[t][0].call(l.exports,p,l,l.exports,this)}return r[t].exports;function p(e){return f(p.resolve(e))}}f.isParcelRequire=!0,f.Module=function(e){this.id=e,this.bundle=f,this.exports={}},f.modules=e,f.cache=r,f.parent=o,f.register=function(r,t){e[r]=[function(e,r){r.exports=t},{}]};for(var c=0;c<t.length;c++)try{f(t[c])}catch(e){i||(i=e)}if(t.length){var l=f(t[t.length-1]);"object"==typeof exports&&"undefined"!=typeof module?module.exports=l:"function"==typeof define&&define.amd?define(function(){return l}):n&&(this[n]=l)}if(parcelRequire=f,i)throw i;return f}({"Zr9p":[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e=function(e){if(!(e=e||{}).el)return[];var t=function(t){if(!t)return!1;e.keyData={},e.keyData.code=t.keyCode||t.which,8===e.keyData.code&&(e.keyData.isDel=!0),46===e.keyData.code&&(e.keyData.isSup=!0)},i=function(t){if(!t)return!1;t.preventDefault();var i=t.target;if(!i)return[];var n=e.mask||i.dataset.mask,r=i.selectionStart,a=i.value.split(""),s=n.split(""),f=r-1,l=Object.keys(s.reduce(function(e,t){return e[t]=t,e},{}));if(["_"].forEach(function(e){return l.splice(l.indexOf(e),1)}),e.keyData.isDel)if(l.indexOf(s[r])>=0){for(var o=f;l.indexOf(s[f])>=0;)f--;f=a[f]?f:++o,a.splice(f--,0,"_")}else a.splice(r,0,"_");else if(e.keyData.isSup){a.splice(r,0,"_");for(var u=r;a[u];){if(-1===l.indexOf(s[u])){for(var c=u+1,d=2;l.indexOf(s[c])>=0;)c=u+d++;a.splice(u,0,a[c]),-1===l.indexOf(s[c])&&a.splice(c,1)}u++}}else{for(var p=f;l.indexOf(s[f])>=0;)f++;a[f]=a[p],a.splice(f+1,1)}s=s.map(function(e,t){return l.indexOf(e)>=0?e:a[t]||e}),i.value=s.join(""),i.setSelectionRange(f+1,f+1)};e.el.removeEventListener("input",t),e.el.removeEventListener("input",i),e.el.addEventListener("keydown",t),e.el.addEventListener("input",i)},t=e;exports.default=t;
-},{}]},{},["Zr9p"], null)
+module.exports = (opt) => {
+  opt = opt || {}
+  if (!opt.el) return []
+
+  const _infoKey = (event) => {
+    if (!event) return false
+    opt.keyData = {}
+    opt.keyData.code = event.keyCode || event.which
+    opt.keyData.code === 8 && (opt.keyData.isDel = true)
+    opt.keyData.code === 46 && (opt.keyData.isSup = true)
+  }
+
+  const _czmask = (event) => {
+    if (!event) return false
+    event.preventDefault()
+
+    const target = event.target
+    if (!target) return []
+    const mask = opt.mask || target.dataset.mask
+    const cursor = target.selectionStart
+    const varChar = ['_']
+    const value = target.value.split('')
+    let arrMask = mask.split('')
+    let positionCursor = cursor - 1
+
+    // almacena la lista de caracteres no modificables
+    const fixedChars = Object.keys(
+      arrMask.reduce((result, item) => {
+        result[item] = item
+        return result
+      }, {})
+    )
+    varChar.forEach((char) => fixedChars.splice(fixedChars.indexOf(char), 1))
+
+    if (opt.keyData.isDel) {
+      // captura borrar tecla delete
+      if (fixedChars.indexOf(arrMask[cursor]) >= 0) {
+        let initPositionDel = positionCursor
+        while (fixedChars.indexOf(arrMask[positionCursor]) >= 0) {
+          positionCursor--
+        }
+        positionCursor = value[positionCursor]
+          ? positionCursor
+          : ++initPositionDel
+        value.splice(positionCursor--, 0, '_')
+      } else value.splice(cursor, 0, '_')
+    } else if (opt.keyData.isSup) {
+    // captura borrar tecla suprimir
+      value.splice(cursor, 0, '_')
+      let initCursorSup = cursor
+      while (value[initCursorSup]) {
+        if (fixedChars.indexOf(arrMask[initCursorSup]) === -1) {
+          let nextElement = initCursorSup + 1
+          let cnt = 2
+          while (fixedChars.indexOf(arrMask[nextElement]) >= 0) {
+            nextElement = initCursorSup + cnt++
+          }
+          value.splice(initCursorSup, 0, value[nextElement])
+          if (fixedChars.indexOf(arrMask[nextElement]) === -1) {
+            value.splice(nextElement, 1)
+          }
+        }
+        initCursorSup++
+      }
+    } else {
+      // captura teclas
+      // busca una posición para el nuevo caracter
+      const initPosition = positionCursor
+      while (fixedChars.indexOf(arrMask[positionCursor]) >= 0) {
+        positionCursor++
+      }
+      value[positionCursor] = value[initPosition]
+      value.splice(positionCursor + 1, 1)
+    }
+
+    // remplaza los valores existentes y nuevos en la mascara
+    arrMask = arrMask.map((char, ix) => {
+      if (fixedChars.indexOf(char) >= 0) return char
+      else return value[ix] || char
+    })
+
+    // carga el nuevo valor
+    target.value = arrMask.join('')
+
+    // mueve el cursor
+    target.setSelectionRange(positionCursor + 1, positionCursor + 1)
+  }
+
+  // eventos
+  opt.el.removeEventListener('input', _infoKey)
+  opt.el.removeEventListener('input', _czmask)
+  opt.el.addEventListener('keydown', _infoKey)
+  opt.el.addEventListener('input', _czmask)
+}
+
+// export default CzMask

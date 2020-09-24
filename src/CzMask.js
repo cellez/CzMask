@@ -1,4 +1,4 @@
-const CzMask = (opt) => {
+module.exports = (opt) => {
   opt = opt || {}
   if (!opt.el) return []
 
@@ -93,4 +93,4 @@ const CzMask = (opt) => {
   opt.el.addEventListener('input', _czmask)
 }
 
-export default CzMask
+// export default CzMask
