@@ -1,12 +1,17 @@
 {
   "name": "czmask",
   "version": "1.0.0",
-  "description": "mascara para inputs",
-  "main": "index.js",
+  "description": "CzMask, mask for inputs",
+  "main": "src/index.js",
   "scripts": {
-    "serve": "parcel serveo src/index.html --out-dir serve",
-    "build": "parcel build src/index.html --out-dir build",
-    "make": "parcel build src/CzMask.js"
+    "serve": "rm -rf ./serve && rm -rf ./.cache && parcel src/index.html --out-dir serve",
+    "build": "parcel build src/index.html --out-dir build --public-url ./",
+    "make": "parcel build src/CzMask.js",
+    "clean": "rm ./serve && rm -rf ./.cache && rm -rf ./build && rm -rf ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cellez/CzMask.git"
   },
   "keywords": [
     "cellez",
@@ -15,8 +20,8 @@
     "html",
     "input"
   ],
-  "author": "@jonellrz",
-  "license": "ISC",
+  "author": "JonellRz",
+  "license": "MIT",
   "devDependencies": {
     "parcel-bundler": "^1.12.4"
   }
