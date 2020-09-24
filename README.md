@@ -13,6 +13,9 @@ mask for inputs, JavaScript Vanilla
 ## Install
 
 - NPM
-> npm install CzMask   
+> npm install czmask   
 
-> import CzMask from 'CzMask';
+> import CzMask from 'czmask';
+
+- CDN:
+> `<script src="https://unpkg.com/czmask"></script>`
