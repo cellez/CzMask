@@ -33,6 +33,7 @@ const CzMask = (opt) => {
     varChar.forEach((char) => fixedChars.splice(fixedChars.indexOf(char), 1))
 
     if (opt.keyData.isDel) {
+      // captura borrar tecla delete
       if (fixedChars.indexOf(arrMask[cursor]) >= 0) {
         let initPositionDel = positionCursor
         while (fixedChars.indexOf(arrMask[positionCursor]) >= 0) {
@@ -44,6 +45,7 @@ const CzMask = (opt) => {
         value.splice(positionCursor--, 0, '_')
       } else value.splice(cursor, 0, '_')
     } else if (opt.keyData.isSup) {
+    // captura borrar tecla suprimir
       value.splice(cursor, 0, '_')
       let initCursorSup = cursor
       while (value[initCursorSup]) {
@@ -61,6 +63,7 @@ const CzMask = (opt) => {
         initCursorSup++
       }
     } else {
+      // captura teclas
       // busca una posición para el nuevo caracter
       const initPosition = positionCursor
       while (fixedChars.indexOf(arrMask[positionCursor]) >= 0) {
@@ -76,10 +79,14 @@ const CzMask = (opt) => {
       else return value[ix] || char
     })
 
+    // carga el nuevo valor
     target.value = arrMask.join('')
+
+    // mueve el cursor
     target.setSelectionRange(positionCursor + 1, positionCursor + 1)
   }
 
+  // eventos
   opt.el.removeEventListener('input', _infoKey)
   opt.el.removeEventListener('input', _czmask)
   opt.el.addEventListener('keydown', _infoKey)
