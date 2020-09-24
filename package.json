@@ -1,6 +1,6 @@
 {
   "name": "czmask",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "CzMask, mask for inputs",
   "main": "dist/CzMask.js",
   "scripts": {
