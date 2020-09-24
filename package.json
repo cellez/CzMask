@@ -4,8 +4,8 @@
   "description": "mascara para inputs",
   "main": "index.js",
   "scripts": {
-    "serve": "parcel serveo src/index.html",
-    "build": "parcel build src/index.html  --out-dir build",
+    "serve": "parcel serveo src/index.html --out-dir serve",
+    "build": "parcel build src/index.html --out-dir build",
     "make": "parcel build src/CzMask.js"
   },
   "keywords": [
