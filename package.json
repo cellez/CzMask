@@ -6,7 +6,7 @@
   "scripts": {
     "serve": "rm -rf ./serve && rm -rf ./.cache && parcel src/index.html --out-dir serve",
     "build": "parcel build src/index.html --out-dir build --public-url ./",
-    "make": "parcel build src/CzMask.js",
+    "make": "parcel build src/CzMask.js --no-source-maps",
     "clean": "rm ./serve && rm -rf ./.cache && rm -rf ./build && rm -rf ./dist"
   },
   "repository": {
