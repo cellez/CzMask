@@ -2,6 +2,9 @@
 
 Simple mask for inputs, JavaScript Vanilla
 
+[![version](https://img.shields.io/github/v/tag/cellez/czmask?include_prereleases&style=flat-square)](https://raw.githubusercontent.com/cellez/CzMask/master/dist/CzMask.js) [![npm version](https://img.shields.io/npm/v/czmask?style=flat-square)](https://www.npmjs.com/package/czmask) [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+
+
 ## Install
 
 - NPM install `npm install czmask`
