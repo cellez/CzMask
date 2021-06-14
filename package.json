@@ -1,0 +1,31 @@
+{
+  "name": "czmask",
+  "version": "1.10.1",
+  "main": "dist/CzMask.js",
+  "scripts": {
+    "serve": "parcel src/index.html",
+    "make:npm": "rm -rf ./dist && parcel build src/CzMask.ts --out-dir dist --no-source-maps --public-url ./",
+    "build": "parcel build src/index.html --out-dir build --public-url ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cellez/CzMask.git"
+  },
+  "keywords": [
+    "cellez",
+    "CzMask",
+    "mask",
+    "input"
+  ],
+  "author": "JonellRz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cellez/CzMask/issues"
+  },
+  "homepage": "https://github.com/cellez/CzMask#readme",
+  "description": "CzMask, mask for inputs text",
+  "dependencies": {
+    "parcel-bundler": "^1.12.5",
+    "typescript": "^4.3.2"
+  }
+}
