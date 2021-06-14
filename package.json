@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/cellez/CzMask#readme",
   "description": "CzMask, mask for inputs text",
-  "dependencies": {
+  "devDependencies": {
     "parcel-bundler": "^1.12.5",
     "typescript": "^4.3.2"
   }
