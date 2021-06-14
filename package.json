@@ -1,6 +1,6 @@
 {
   "name": "czmask",
-  "version": "1.10.2",
+  "version": "1.10.3",
   "main": "dist/CzMask.js",
   "scripts": {
     "serve": "parcel src/index.html",
